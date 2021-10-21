@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('createPost', 'PostController@createPost')->name('createPost.post');
 Route::get('getPosts', 'PostController@getPosts')->name('getPosts');
+Route::get('showPost/{id}', 'PostController@showPost')->name('showPost');
+Route::post('updatePost/{id}', 'PostController@update')->name('updatePost');
+Route::post('deletePost/{id}', 'PostController@destroy')->name('deletePost');
