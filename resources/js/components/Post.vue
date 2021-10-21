@@ -13,7 +13,7 @@
                     Add Post
                 </button>
             </div>
-            <div class="col-sm-8" v-for="item in posts">
+            <div class="col-sm-8" v-for="item in posts" :key="item.id">
                     <div class="card-body">
                         <h3 class="card-title">{{item.title}}</h3>
                         <p class="card-text">

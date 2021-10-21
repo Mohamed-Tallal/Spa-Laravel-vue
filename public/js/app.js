@@ -37770,7 +37770,7 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _vm._l(_vm.posts, function(item) {
-          return _c("div", { staticClass: "col-sm-8" }, [
+          return _c("div", { key: item.id, staticClass: "col-sm-8" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h3", { staticClass: "card-title" }, [
                 _vm._v(_vm._s(item.title))
