@@ -10,7 +10,7 @@ class PostController extends Controller
 
     public function getPosts()
     {
-        $posts = Post::orderBy('id' ,'DESC')->get();
+        $posts = Post::orderBy('id' ,'DESC')->paginate(5);
         return response()->json(['code' => 200 , 'status' => 'success','data' => $posts], 200);
 
     }

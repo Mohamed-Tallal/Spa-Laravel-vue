@@ -1,7 +1,6 @@
 <template>
     <div>
 
-<hr>
         <div class="alert alert-success mb-3" role="alert" v-if="msg !== ''">
            {{msg}}
         </div>
@@ -13,7 +12,7 @@
         </button>
     </div>
 </div>
-        <div v-for="item in posts" :key="item.id">
+        <div v-for="item in posts.data" :key="item.id">
              <div class="row border m-3" >
             <div class="col-sm-10" >
                     <div class="card-body">
@@ -32,6 +31,7 @@
         </div>
         </div>
 
+        <pagination :data="posts" @pagination-change-page="getPosts"></pagination>
 
 
         <!-- Modal -->
@@ -146,8 +146,8 @@ export default{
                }
            })
        },
-      getPosts(){
-           axios.get('api/getPosts').then(res => {
+      getPosts(page = 1){
+           axios.get('api/getPosts?page=' + page).then(res => {
               this.posts = res.data.data;
               console.log(this.posts)
            });
