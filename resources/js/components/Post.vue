@@ -1,10 +1,27 @@
 <template>
     <div>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success float-right mt-5" data-toggle="modal" data-target="#exampleModal">
-            Add Post
-        </button>
 
+<hr>
+        <div class="alert alert-success mb-3" role="alert" v-if="msg !== ''">
+           {{msg}}
+        </div>
+
+        <div class="row">
+            <div class="col col-md-12 mb-3">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal">
+                    Add Post
+                </button>
+            </div>
+            <div class="col-sm-8" v-for="item in posts">
+                    <div class="card-body">
+                        <h3 class="card-title">{{item.title}}</h3>
+                        <p class="card-text">
+                            {{item.desc}}
+                        </p>
+                    </div>
+            </div>
+        </div>
 
 
 
@@ -23,18 +40,20 @@
                         <form>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tittle</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <input type="email" :class="['form-control' ,validate.title ? 'is-invalid' : '' ]" v-model="post.title" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <small class="badge badge-danger text-white" v-if="validate.title">{{validate.title[0]}} </small>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Description </label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea :class="['form-control' ,validate.desc ? 'is-invalid' : '' ]"  v-model="post.desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <small class="badge badge-danger text-white" v-if="validate.desc">{{validate.desc[0]}} </small>
+
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save </button>
+                        <button type="button" class="btn btn-success" @click="createPost">Save </button>
                     </div>
                 </div>
             </div>
@@ -49,10 +68,45 @@ export default{
         return{
             post:{
                 id : "",
-                tittle : "",
+                title : "",
                 desc : ""
-            }
+            },
+            validate:[],
+            msg:'',
+            posts : []
         }
+    },
+  methods: {
+       createPost(){
+           axios.post('api/createPost' , this.post).then(res => {
+               if(res.data.code === 200){
+                   this.post = res.data.data
+                   this.msg = res.data.msg
+                   $("#exampleModal .close").click();
+                   this.post = {
+                       id : "",
+                       title : "",
+                       desc : ""
+                   }
+                   this.getPosts();
+
+               }else if(res.data.code === 400){
+                   this.validate  = res.data.data;
+                   console.log(this.validate);
+               }
+           })
+       },
+      getPosts(){
+           axios.get('api/getPosts').then(res => {
+              this.posts = res.data.data;
+              console.log(this.posts)
+           });
+      }
+
+  },
+    created() {
+        this.getPosts()
+        console.log(this.posts)
     }
 }
 
