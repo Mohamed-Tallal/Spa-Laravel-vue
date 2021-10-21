@@ -8,30 +8,10 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter)
 import Myheader from  './components/MyHeader'
-import Login from  './components/Login'
-import Post from  './components/Post'
-import Register from  './components/Register'
-
-
-const routes = [
-    {
-         path: '/loginVue',   
-         name: 'Login',
-         component : Login
-    },
-    { 
-        path: '/postVue', 
-        name: 'Post',
-        component : Post 
-    },
-    {   path: '/registerVue',
-        name: 'Register',
-        component : Register 
-    }
-]
-
+import routes from "./routes";
 const router = new VueRouter({
-     routes
+    //mode:'history',
+    routes
   })
 
 
@@ -39,7 +19,7 @@ const router = new VueRouter({
     el: '#hello',
     //routers,
     router,
-    mode:'history',
+
     components :{
         Myheader
     }

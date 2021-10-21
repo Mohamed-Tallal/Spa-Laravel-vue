@@ -1,35 +1,23 @@
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Login from  './components/Login'
+import Post from  './components/Post'
+import Register from  './components/Register'
 
-import LoginComponents from  './components/Login'
-import PostComponents from  './components/Post'
-import RegisterComponents from  './components/Register'
-
-Vue.use(VueRouter)
 
 const routes = [
     {
-         path: '/login',   
-         name: 'Login',
-         component : LoginComponents
+        path: '/loginVue',
+        name: 'loginVue',
+        component : Login
     },
-    { 
-        path: '/post', 
-        name: 'Post',
-        component : PostComponents 
+    {
+        path: '/postVue',
+        name: 'postVue',
+        component : Post
     },
-    {   path: '/register',
-        name: 'Register',
-        component : RegisterComponents 
+    {   path: '/registerVue',
+        name: 'registerVue',
+        component : Register
     }
 ]
-
-const router = VueRouter({
-    mode:'history' ,
-    routes
-})
-
-
-export default router
-
+export default routes
