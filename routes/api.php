@@ -23,3 +23,4 @@ Route::get('getPosts', 'PostController@getPosts')->name('getPosts');
 Route::get('showPost/{id}', 'PostController@showPost')->name('showPost');
 Route::post('updatePost/{id}', 'PostController@update')->name('updatePost');
 Route::post('deletePost/{id}', 'PostController@destroy')->name('deletePost');
+Route::post('registerUser', 'UserController@registerUser')->name('registerUser');
