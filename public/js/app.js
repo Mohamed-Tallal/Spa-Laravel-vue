@@ -2070,6 +2070,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/showPost/' + id).then(function (res) {
         _this3.post = res.data.data;
+
+        if (_this3.validate !== []) {
+          _this3.validate = [];
+        }
       });
     },
     updatePost: function updatePost(id) {

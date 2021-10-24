@@ -15,17 +15,10 @@ class PostController extends Controller
 
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-
     public function createPost(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|unique:posts,title|max:255',
             'desc' => 'required',
         ]);
 
@@ -39,16 +32,6 @@ class PostController extends Controller
      return response()->json(['code' => 200 ,'msg' => 'Post added successfully', 'status' => 'success','data' => $post], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
 
     public function showPost($id)
@@ -63,19 +46,12 @@ class PostController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
 
         $validator = Validator::make($request->all(), [
-        'title' => 'required|unique:posts|max:255',
+        'title' => 'required|unique:posts,title,'.$id.'|max:255',
         'desc' => 'required',
         ]);
 
@@ -93,12 +69,6 @@ class PostController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $post = Post::find($id);

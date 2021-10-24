@@ -155,6 +155,9 @@ export default{
       showPost(id){
           axios.get('api/showPost/'+id).then(res => {
               this.post = res.data.data
+              if(this.validate !== []  ){
+                  this.validate = [];
+              }
           });
       },
       updatePost(id){
