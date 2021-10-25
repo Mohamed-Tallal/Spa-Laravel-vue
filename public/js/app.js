@@ -54650,7 +54650,7 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  //mode:'history',
+  mode: 'history',
   routes: _routes__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 var app = new Vue({

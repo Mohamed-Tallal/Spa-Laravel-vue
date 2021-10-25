@@ -12,7 +12,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 import Myheader from  './components/MyHeader'
 import routes from "./routes";
 const router = new VueRouter({
-    //mode:'history',
+    mode:'history',
     routes
   })
 
