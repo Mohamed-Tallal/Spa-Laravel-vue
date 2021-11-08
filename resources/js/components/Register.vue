@@ -6,7 +6,6 @@
                 Register
             </div>
             <div class="card-body" style="width: 500px">
-                <form>
                     <div class="alert alert-success" role="alert" v-if="msg !== ''">
                         {{msg}}
                     </div>
@@ -33,7 +32,6 @@
                     </div>
 
                     <button @click="registerUser" class="btn btn-primary">Submit</button>
-                </form>
             </div>
         </div>
     </div>

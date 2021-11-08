@@ -16,11 +16,11 @@ class AuthController extends Controller
         ]);
         if ($validator->fails()){
            // 'success','data' => $post], 200
-            return response()->json(['code' => 400 ,'status' =>'error' ,'msg' => $validator->errors()->all() ], 200);
+            return response()->json(['code' => 400 ,'status' =>'error' ,'msg' => $validator->errors() ], 200);
         }
         $credentials = request(['email', 'password']);
         if (! $token_user = auth()->guard('api')->attempt($credentials)) {
-            return response()->json(['code' => 401 ,'status' =>'error','msg' => ['Unauthorized']], 200);
+            return response()->json(['code' => 401 ,'status' =>'error','msg' => ['msg'=>'Unauthorized']], 200);
         }
         return $this->respondWithToken($token_user);
     }
