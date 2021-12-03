@@ -127,6 +127,11 @@ export default{
     },
   methods: {
        createPost(){
+                       let loader = this.$loading.show({
+                    // Optional parameters
+                    container: this.fullPage ? null : this.$refs.formContainer,
+                    onCancel: this.onCancel,
+                });
            axios.post('api/createPost' , this.post).then(res => {
                if(res.data.code === 200){
                    this.post = res.data.data
@@ -143,24 +148,44 @@ export default{
                }else if(res.data.code === 400){
                    this.validate  = res.data.data;
                    console.log(this.validate);
+
                }
+                               loader.hide()
+
            })
        },
       getPosts(page = 1){
+            let loader = this.$loading.show({
+                    // Optional parameters
+                    container: this.fullPage ? null : this.$refs.formContainer,
+                    onCancel: this.onCancel,
+                });
            axios.get('api/getPosts?page=' + page).then(res => {
               this.posts = res.data.data;
+            loader.hide()
               console.log(this.posts)
            });
       },
       showPost(id){
+                      let loader = this.$loading.show({
+                    // Optional parameters
+                    container: this.fullPage ? null : this.$refs.formContainer,
+                    onCancel: this.onCancel,
+                });
           axios.get('api/showPost/'+id).then(res => {
               this.post = res.data.data
               if(this.validate !== []  ){
                   this.validate = [];
               }
+                          loader.hide()
           });
       },
       updatePost(id){
+             let loader = this.$loading.show({
+                    // Optional parameters
+                    container: this.fullPage ? null : this.$refs.formContainer,
+                    onCancel: this.onCancel,
+                });
           axios.post('api/updatePost/'+id , this.post).then(res => {
               if(res.data.code === 200){
                  // this.post = res.data.data
@@ -178,14 +203,23 @@ export default{
                   this.validate  = res.data.data;
                   console.log(this.validate);
               }
+              loader.hide()
+
           });
       },
       deletePost(id){
+                let loader = this.$loading.show({
+                    // Optional parameters
+                    container: this.fullPage ? null : this.$refs.formContainer,
+                    onCancel: this.onCancel,
+                });
           axios.post('api/deletePost/'+id ).then(res => {
               if(res.data.code === 200){
                   this.msg = res.data.msg
                   this.getPosts();
               }
+            loader.hide()
+
           })
       }
   },
