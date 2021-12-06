@@ -16,10 +16,15 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 import Myheader from  './components/MyHeader'
 import MyTem from  './components/Tem.vue'
 import routes from "./routes";
+import VueSweetalert2 from 'vue-sweetalert2';
 
+// If you don't need the styles, do not connect
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+Vue.use(VueSweetalert2);
 const router = new VueRouter({
     mode:'history',
-    routes
+    routes,
 })
 
  const app = new Vue({

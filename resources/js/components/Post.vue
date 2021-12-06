@@ -26,6 +26,8 @@
                 <div class="d-flex justify-content-center text-center">
                     <button type="button" class="btn btn-warning btn-sm mr-2 " @click="showPost(item.id)" data-toggle="modal" data-target="#exampleModal1">Update</button>
                     <button type="button"  @click="deletePost(item.id)" class="btn btn-danger btn-sm">Delete</button>
+                    <button type="button" class="btn btn-success" @click="showAlert">Hello</button>
+
                 </div>
             </div>
         </div>
@@ -97,6 +99,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-success" @click="updatePost(post.id)">Save </button>
+
                     </div>
                 </div>
             </div>
@@ -221,7 +224,11 @@ export default{
             loader.hide()
 
           })
-      }
+      },
+       showAlert() {
+      // Use sweetalert2
+      this.$swal('Hello Vue world!!!');
+    },
   },
     created() {
         this.getPosts()
