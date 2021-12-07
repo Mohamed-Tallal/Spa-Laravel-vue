@@ -64,6 +64,10 @@
                             password_confirmation:''
                         };
                         this.errors = [];
+                        Toast.fire({
+                        icon: 'success',
+                        title: 'You are registered now .'
+                        })
                     }else if(res.data.code === 400){
                         this.errors = [];
                         this.errors = res.data.data
