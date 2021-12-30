@@ -60615,41 +60615,11 @@ var routes = [{
       });
     });
   }
-  /**
-   *
-   * meta: { requiresAuth: true }
-   * beforeEnter: (to, from, next) => {
-      Axios.post('api/auth/me').then(() =>{
-          next();
-      }).catch(()=>{
-          return next({name : "loginVue" })
-      })
-  }
-   */
-
 }, {
   path: '/registerVue',
   name: 'registerVue',
   component: _components_Register__WEBPACK_IMPORTED_MODULE_3__["default"]
 }];
-/****
- *
- *
- routes.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        if (!store.getters.getAuth) {
-          next({ name: 'Login' })
-        } else {
-           next();
-        }
-      } else {
-        next()
-      }
-});
- */
-
 /* harmony default export */ __webpack_exports__["default"] = (routes);
 
 /***/ }),
