@@ -17,6 +17,16 @@ import Myheader from  './components/MyHeader'
 import MyTem from  './components/Tem.vue'
 import routes from "./routes";
 import Swal from 'sweetalert2';
+import {store} from './store/store'
+const router = new VueRouter({
+    mode:'history',
+    routes,
+})
+var token = localStorage.getItem("user_JWT_Token")
+if(token){
+    store.commit("Set_USER_DATAT",token)
+}
+
 window.Swal = Swal;
 const Toast = Swal.mixin({
     toast: true,
@@ -31,16 +41,10 @@ const Toast = Swal.mixin({
   });
   window.Toast =Toast;
 
-
-const router = new VueRouter({
-    mode:'history',
-    routes,
-})
-
  const app = new Vue({
     el: '#hello',
-    //routers,
     router,
+    store:store,
     components :{
         Myheader,
         MyTem

@@ -11,7 +11,7 @@
                     {{error.msg}}
                 </div>
                     <div class="form-group">
-                        <label>Email address</label>
+                        <label>Email address {{count}}</label>
                         <input type="email" :class="['form-control' , error.email ? 'is-invalid' : ''   ]"  v-model="user.email" aria-describedby="emailHelp">
                         <small v-if="error.email" id="emailHelp" class="form-text text-muted">{{error.email[0]}}</small>
                     </div>
@@ -42,10 +42,24 @@
                 error:[],
             }
         },
+        computed:{
+            count(){
+                return this.$store.state.count
+
+            }
+        },
         methods:{
             login(){
-                console.log(this.user)
+                this.$store.dispatch('login' , this.user).then(()=>{
+                    this.$router.push({name : 'postVue' })
+                })
+                console.log("getters state =  ")
+                console.log(this.$store.getters.isLoged)
 
+                /*
+                then(()=>{
+                    this.$router.push({name : 'postVue' })
+                })
                 axios.post('api/login',this.user).then(res=>{
                     if(res.data.code != 400 && res.data.code != 401 ){
                         localStorage.setItem('user_token' ,res.data.access_token )
@@ -70,6 +84,8 @@
 
                     console.log("There was an error!", error.data);
                 });
+                */
+
             }
         }
     }

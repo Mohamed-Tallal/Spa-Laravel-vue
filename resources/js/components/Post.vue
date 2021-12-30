@@ -161,11 +161,11 @@ export default{
        },
       getPosts(page = 1){
             let loader = this.$loading.show({
-                    // Optional parameters
                     container: this.fullPage ? null : this.$refs.formContainer,
                     onCancel: this.onCancel,
                 });
-           axios.get('api/getPosts?page=' + page).then(res => {
+
+           axios.get('api/auth/getPosts?page=' + page ).then(res => {
               this.posts = res.data.data;
             loader.hide()
               console.log(this.posts)
@@ -221,16 +221,33 @@ export default{
                     container: this.fullPage ? null : this.$refs.formContainer,
                     onCancel: this.onCancel,
                 });
-          axios.post('api/deletePost/'+id ).then(res => {
+                Swal.fire({
+                title: 'Are you sure?',
+                text: "You will remove this record!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+                }).then((result) => {
+  if (result.isConfirmed) {
+  axios.post('api/deletePost/'+id ).then(res => {
               if(res.data.code === 200){
                   this.msg = res.data.msg
                   this.getPosts();
               }
-            loader.hide()
 
           })
-      },
+        Swal.fire(
+        'Deleted!',
+        'This Record has been deleted.',
+        'success'
+        )
+    }
+    })
+            loader.hide()
 
+      }
   },
     created() {
         this.getPosts()
